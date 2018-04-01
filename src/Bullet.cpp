@@ -1,59 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.cpp                                         :+:      :+:    :+:   */
+/*   Bullet.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aratinau <aratinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/01 15:48:57 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/04/01 21:38:42 by aratinau         ###   ########.fr       */
+/*   Updated: 2018/04/01 21:55:31 by aratinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
 #include <ncurses.h>
-#include <string>
-#include "Player.hpp"
+#include "Bullet.hpp"
 #include "IEntity.hpp"
 
-const int Player::_xSize = 3;
-const int Player::_ySize = 2;
-const std::string Player::_model = "/o\\";
-
-Player::Player(char type) : _type(type) {}
-Player::Player(Player const & obj)
+Bullet::Bullet(char type) : _type(type)
+{
+	this->_x = 0;
+	this->_y = LINES;
+}
+Bullet::Bullet(Bullet const & obj)
 {
 	*this = obj;
 }
-Player::~Player(void) {}
+Bullet::~Bullet(void) {}
 
-Player& Player::operator=(Player const &)
+Bullet& Bullet::operator=(Bullet const &)
 {
 	return *this;
 }
 
-std::string Player::getModel(void)
+char Bullet::getType(void)
 {
-	return this->_model;
+	return this->_type;
 }
 
-void Player::update(void)
+void Bullet::update(void)
 {
 	this->_counter++;
 
 	if (this->_counter >= 50)
 	{
-		this->_y = this->_y + 1;
+		this->_y = this->_y - 1;
 		this->_counter = 0;
 	}
 }
 
-void Player::render(void)
+void Bullet::render(void)
 {
 	move(this->_y, this->_x);
 	addch(this->getType());
-}
-
-char Player::getType(void)
-{
-	return this->_type;
 }
