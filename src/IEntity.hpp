@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.hpp                                         :+:      :+:    :+:   */
+/*   IEntity.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/01 15:43:11 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/04/01 17:18:02 by pbondoer         ###   ########.fr       */
+/*   Created: 2018/04/01 19:30:17 by pbondoer          #+#    #+#             */
+/*   Updated: 2018/04/01 19:57:10 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_CLASS_H
-# define PLAYER_CLASS_H
+#ifndef ENTITY_INTERFACE_H
+# define ENTITY_INTERFACE_H
 
-# include <string>
-
-class Player
+class IEntity
 {
 	public:
-		Player(void);
-		Player(Player const & obj);
-		~Player(void);
+		IEntity(void);
+		IEntity(IEntity const & obj);
+		virtual ~IEntity(void);
 
-		Player& operator=(Player const &);
+		IEntity& operator=(IEntity const &rhs);
 
-		std::string getModel(void);
+		virtual void update(void) = 0;
+		virtual void render(void) = 0;
 
-		int getX(void);
-		void setX(int x);
+		void setPosition(int y, int x);
 
 		int getY(void);
 		void setY(int y);
-	private:
-		static const int _xSize;
-		static const int _ySize;
-		static const std::string _model;
 
+		int getX(void);
+		void setX(int x);
+	protected:
+		int _counter;
 		int _x;
 		int _y;
 };
 
-#endif // PLAYER_CLASS_H
+#endif // ENTITY_INTERFACE_H

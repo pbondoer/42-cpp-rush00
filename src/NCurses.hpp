@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Player.hpp                                         :+:      :+:    :+:   */
+/*   NCurses.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/01 15:43:11 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/04/01 17:18:02 by pbondoer         ###   ########.fr       */
+/*   Created: 2018/04/01 17:17:12 by pbondoer          #+#    #+#             */
+/*   Updated: 2018/04/01 19:49:17 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_CLASS_H
-# define PLAYER_CLASS_H
+#ifndef NCURSES_CLASS_H
+# define NCURSES_CLASS_H
 
-# include <string>
+# include <cstddef>
 
-class Player
+class NCurses
 {
 	public:
-		Player(void);
-		Player(Player const & obj);
-		~Player(void);
+		NCurses(void);
+		NCurses(NCurses const &);
+		~NCurses(void);
 
-		Player& operator=(Player const &);
+		NCurses& operator=(NCurses const &);
 
-		std::string getModel(void);
-
+		void setSize(int y, int x);
 		int getX(void);
-		void setX(int x);
-
 		int getY(void);
-		void setY(int y);
 	private:
-		static const int _xSize;
-		static const int _ySize;
-		static const std::string _model;
-
 		int _x;
 		int _y;
 };
 
-#endif // PLAYER_CLASS_H
+NCurses* env(NCurses *c = NULL);
+
+#endif

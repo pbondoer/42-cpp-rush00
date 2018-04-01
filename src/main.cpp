@@ -6,43 +6,33 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 18:17:56 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/04/01 16:46:17 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/04/01 19:57:39 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
-#include <csignal>
 #include <iostream>
+#include <list>
 
 #include "Player.hpp"
-
-// XXX
-void onResize(int);
-// XXX
+#include "Enemy.hpp"
+#include "NCurses.hpp"
 
 int main(void)
 {
-	initscr(); // initialize ncurses
-	cbreak(); // don't buffer the TTY
-	noecho(); // don't echo in TTY
+	NCurses e;
+	env(&e);
 
-	curs_set(0); // hide cursor
-
-	keypad(stdscr, TRUE); // allow special keys
-	nodelay(stdscr, TRUE); // dont delay strokes
-	scrollok(stdscr, FALSE); // dont allow scrolling
-
-	move(0, 0);
-
-	// handlers
-	std::signal(SIGWINCH, onResize); // allow resizing
+	Player p;
 
 	bool shouldQuit = false;
 	int ch;
 
-	Player p;
+	std::list<IEntity *> enemies;
+	int counter = 0;
 
 	while (!shouldQuit) {
+		// handle keyboard input
 		while ((ch = getch()) != ERR)
 		{
 			if (ch == 'q')
@@ -59,10 +49,32 @@ int main(void)
 				p.setY(p.getY() - 1);
 		}
 
-		// type it in the window
+		counter++;
+		if (counter >= 30)
+		{
+			Enemy *e = new Enemy('@');
+			enemies.push_back(e);
+			counter = 0;
+		}
 
-		clear();
+		clear(); // pfff we're just lazy
 
+		for (std::list<IEntity *>::iterator it = enemies.begin();
+				it != enemies.end();
+				it++)
+		{
+			(*it)->update();
+			(*it)->render();
+
+			if ((*it)->getY() >= LINES)
+			{
+				delete *it;
+				it = enemies.erase(it);
+			}
+		}
+
+
+		// start drawing
 		move(p.getY(), p.getX());
 		addstr(p.getModel().c_str());
 
@@ -72,19 +84,5 @@ int main(void)
 		napms(1);
 	}
 
-	// clean the memory
-	// delwin(win);
-
-	// stop using ncurses
-	endwin();
 	return 0;
-}
-
-void onResize(int)
-{
-	endwin();
-	// Needs to be called after an endwin() so ncurses will initialize
-	// itself with the new terminal dimensions.
-	refresh();
-	clear();
 }

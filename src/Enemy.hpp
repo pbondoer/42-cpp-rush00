@@ -12,31 +12,23 @@
 #ifndef ENEMY_CLASS_H
 # define ENEMY_CLASS_H
 
-# include<string>
+# include "IEntity.hpp"
 
-class Enemy
+class Enemy : public IEntity
 {
 	public:
-		Enemy(std::string type);
+		Enemy(char type);
 		Enemy(Enemy const & obj);
 		~Enemy(void);
 
 		Enemy& operator=(Enemy const &);
 
-		std::string getType(void);
+		char	getType(void);
 		void	update(void);
 		void	render(void);
 
-		int getY(void);
-		void setY(int y);
-
 	private:
-		std::string _type;
-		int _x;
-
-		int _maxX;
-		int _y;
-		int _counter;
+		char	_type;
 };
 
 #endif // ENEMY_CLASS_H
