@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2018/04/01 19:42:41 by pbondoer         ###   ########.fr        #
+#    Updated: 2018/04/01 22:29:51 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ OBJ_DIR		:= ./obj
 SRC			:=	main.cpp \
 				Player.cpp \
 				Enemy.cpp \
+				Bullet.cpp \
 				IEntity.cpp \
+				FakeList.cpp \
 				NCurses.cpp
 
 OBJ			:= $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))

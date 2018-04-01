@@ -17,7 +17,7 @@
 class Enemy : public IEntity
 {
 	public:
-		Enemy(char type);
+		Enemy();
 		Enemy(Enemy const & obj);
 		~Enemy(void);
 
@@ -26,9 +26,12 @@ class Enemy : public IEntity
 		char	getType(void);
 		void	update(void);
 		void	render(void);
+		bool	collide(IEntity &entity);
 
 	private:
 		char	_type;
+		int		_speed;
+		static char _types[6];
 };
 
 #endif // ENEMY_CLASS_H

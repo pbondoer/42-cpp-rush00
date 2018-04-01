@@ -6,7 +6,7 @@
 /*   By: aratinau <aratinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/01 15:43:11 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/04/01 21:38:14 by aratinau         ###   ########.fr       */
+/*   Updated: 2018/04/01 23:11:21 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,20 @@
 class Player : public IEntity
 {
 	public:
-		Player(char type);
+		Player(void);
 		Player(Player const & obj);
 		~Player(void);
 
 		Player& operator=(Player const &);
 
-		char	getType(void);
-
 		std::string getModel(void);
 		void	update(void);
 		void	render(void);
+		bool	shouldRemove(void);
+		bool	collide(IEntity &entity);
 	private:
 		static const int _xSize;
-		static const int _ySize;
 		static const std::string _model;
-
-		char	_type;
 };
 
 #endif // PLAYER_CLASS_H
