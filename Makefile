@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2018/03/31 18:19:01 by pbondoer         ###   ########.fr        #
+#    Updated: 2018/04/01 16:15:48 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,14 @@ SRC_DIR		:= ./src
 OBJ_DIR		:= ./obj
 
 # src / obj files
-SRC			:=	main.cpp
+SRC			:=	main.cpp \
+				Player.cpp
 
 OBJ			:= $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
 
 # compiler
 CXX			:= clang++
-CXXFLAGS	:= -Wall -Wextra -Werror -pedantic -std=c++98 -Weverything
+CXXFLAGS	:= -Wall -Wextra -Werror -pedantic -std=c++98
 # CXXFLAGS	+= -O3 -march=native -pipe -flto
 
 .PHONY: all clean fclean re
