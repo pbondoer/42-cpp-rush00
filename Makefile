@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2018/04/01 22:29:51 by pbondoer         ###   ########.fr        #
+#    Updated: 2018/10/07 18:07:12 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJ			:= $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
 # compiler
 CXX			:= clang++
 CXXFLAGS	:= -Wall -Wextra -Werror -pedantic -std=c++98
-# CXXFLAGS	+= -O3 -march=native -pipe -flto
+CXXFLAGS	+= -O3 -march=native -pipe -flto
 
 .PHONY: all clean fclean re
 
